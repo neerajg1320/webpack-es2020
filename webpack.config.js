@@ -9,7 +9,16 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js', // main
+    assetModuleFilename: '[name][ext]',
     clean: true
+  },
+
+  devtool: 'inline-source-map',
+  devServer: {
+    static: path.resolve(__dirname, 'dist'),
+    port: 5001, // default 8080
+    open: true,
+    hot: true
   },
 
   // 11:35 (video) webpack by default understands json and javascript
@@ -17,6 +26,17 @@ module.exports = {
 
   // loaders
   module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(svg|ico|png|webp|jpeg|jpg|gif)$/,
+        type: 'asset/resource', // builtin loader webpack5
+
+      }
+    ]
 
   },
 
