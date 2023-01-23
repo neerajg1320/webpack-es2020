@@ -27,14 +27,27 @@ module.exports = {
   // loaders
   module: {
     rules: [
+        // css
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },
+        // images
       {
         test: /\.(svg|ico|png|webp|jpeg|jpg|gif)$/,
         type: 'asset/resource', // builtin loader webpack5
 
+      },
+        // javascript for babel
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       }
     ]
 
